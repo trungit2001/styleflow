@@ -1,0 +1,24 @@
+{
+    "os": "Windows-10-10.0.22000-SP0",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-12-02T21:15:53.554049",
+    "startedAt": "2022-12-02T21:15:50.960375",
+    "docker": null,
+    "gpu": "GeForce GTX 765M",
+    "gpu_count": 1,
+    "cpu_count": 8,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "D:\\HK7\\styleflow\\train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "https://github.com/trungit2001/styleflow.git",
+        "commit": "9fd8f98f793755e62b4e0be132dc59b6a8a2a5d6"
+    },
+    "email": "thanhtrungit2001@gmail.com",
+    "root": "D:/HK7/styleflow",
+    "host": "ASUS-G750JW",
+    "username": "trungit",
+    "executable": "D:\\HK7\\styleflow\\env\\Scripts\\python.exe"
+}

@@ -1,0 +1,49 @@
+# set job name
+job_name: kaggle_wikiart
+
+# path file data
+input_path: /kaggle/input/styleflow-dataset
+output_path: ./output
+content_file: /kaggle/input/styleflow-label/coco_10.txt
+style_file: /kaggle/input/styleflow-label/artist_10.txt
+
+# config data
+height: 300
+width: 400
+
+# config model
+seed: 0
+n_flow: 15
+n_block: 2
+no_lu: False
+affine: False
+domain_code: 0
+loss: tv_loss
+vgg: ./vgg_model/vgg_normalised.pth
+lr: 0.00005
+lr_decay: 0.00005
+max_iter: 6000
+lr_steps: [40000, 80000, 120000]
+lr_mults: 0.5
+last_iter: -1
+batch_size: 1
+bn_group: 4
+bn_sync_stats: True
+
+# config weights
+mse_weight: 0
+p_weight: 0.0
+style_weight: 1
+content_weight: 0.1
+
+# other config
+keep_ratio: 0.6
+resume: False
+debug: True
+workers: 2
+log_interval: 100
+freq_save: 500
+
+# config wandb
+name: styleflow
+id: null

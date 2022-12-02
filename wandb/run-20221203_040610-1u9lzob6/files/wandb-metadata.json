@@ -1,0 +1,50 @@
+{
+    "os": "Windows-10-10.0.22000-SP0",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-12-02T21:06:12.839888",
+    "startedAt": "2022-12-02T21:06:10.921612",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "D:\\HK7\\styleflow\\train.py",
+    "codePath": "train.py",
+    "git": {
+        "remote": "https://github.com/trungit2001/styleflow.git",
+        "commit": "9fd8f98f793755e62b4e0be132dc59b6a8a2a5d6"
+    },
+    "email": "thanhtrungit2001@gmail.com",
+    "root": "D:/HK7/styleflow",
+    "host": "ASUS-G750JW",
+    "username": "trungit",
+    "executable": "D:\\HK7\\styleflow\\env\\Scripts\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2401.0,
+        "min": 0.0,
+        "max": 2401.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2401.0,
+            "min": 0.0,
+            "max": 2401.0
+        }
+    ],
+    "disk": {
+        "total": 100.08202743530273,
+        "used": 74.4878158569336
+    },
+    "gpu": "GeForce GTX 765M",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "GeForce GTX 765M",
+            "memory_total": 2147483648
+        }
+    ],
+    "memory": {
+        "total": 15.919422149658203
+    }
+}
