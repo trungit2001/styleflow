@@ -216,5 +216,5 @@ poetry.toml
 
 # End of https://www.toptal.com/developers/gitignore/api/pythonvanilla,python,visualstudiocode
 # My ignore
-data/
+output/
 wandb/

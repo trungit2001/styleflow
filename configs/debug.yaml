@@ -2,10 +2,11 @@
 job_name: debug
 
 # path file data
-input_path: ./data
+input_content_path: ./data/coco_10
+input_style_path: ./data/wikiart_10
+content_file: coco_10.txt
+style_file: wikiart_10.txt
 output_path: ./output
-content_file: ./data/coco_10.txt
-style_file: ./data/artist_10.txt
 
 # config data
 height: 300
@@ -22,7 +23,7 @@ loss: tv_loss
 vgg: ./vgg_model/vgg_normalised.pth
 lr: 0.00005
 lr_decay: 0.00005
-max_iter: 6000
+max_iter: 10
 lr_steps: [40000, 80000, 120000]
 lr_mults: 0.5
 last_iter: -1
@@ -40,9 +41,9 @@ content_weight: 0.1
 keep_ratio: 0.6
 resume: False
 debug: True
-workers: 2
-log_interval: 100
-freq_save: 500
+workers: 4
+log_interval: 1
+freq_save: 1
 
 # config wandb
 name: styleflow

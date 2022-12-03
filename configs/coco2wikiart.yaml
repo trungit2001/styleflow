@@ -1,11 +1,12 @@
 # set job name
-job_name: kaggle_wikiart
+job_name: coco2wikiart
 
 # path file data
-input_path: /kaggle/input/styleflow-dataset
+input_content_path: /kaggle/input/coco25k
+input_style_path: /kaggle/input/wikiart25k
+content_file: coco25k.txt
+style_file: wikiart25k.txt
 output_path: ./output
-content_file: /kaggle/input/styleflow-label/coco_10.txt
-style_file: /kaggle/input/styleflow-label/artist_10.txt
 
 # config data
 height: 300
@@ -22,7 +23,7 @@ loss: tv_loss
 vgg: ./vgg_model/vgg_normalised.pth
 lr: 0.00005
 lr_decay: 0.00005
-max_iter: 6000
+max_iter: 5000
 lr_steps: [40000, 80000, 120000]
 lr_mults: 0.5
 last_iter: -1
