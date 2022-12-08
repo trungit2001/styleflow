@@ -73,7 +73,8 @@ if __name__ == '__main__':
     if args.wandb:
         if not parsed_args.resume:
             args.id = wandb.util.generate_id()
-        wandb.init(config=dict(args), resume="allow", name=f"{args.name}_{args.id}", id=args.id)
+        wandb.init(config=dict(args), project=args.project, entity=args.entity,\
+             resume="allow", name=f"{args.name}_{args.id}", id=args.id)
         args = Munch(wandb.config)
     
     if args.show_model:
