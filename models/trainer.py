@@ -22,9 +22,9 @@ class MergeModel(nn.Module):
 
     def forward(self, content_images, domain_class):
         z_c = self.glow(content_images, forward=True)
-        stylized = self.glow(z_c, forward=False, style=domain_class)
+        stylized_images = self.glow(z_c, forward=False, style=domain_class)
 
-        return stylized
+        return stylized_images
 
 
 class Trainer():
@@ -50,6 +50,7 @@ class Trainer():
         content_images = content_iter.to(self.device)
         style_images = style_iter.to(self.device)
         target_style = style_iter
+        min_loss = 2**16
 
         if self.init:
             base_code = self.encoder.cat_tensor(style_images.to(self.device))
@@ -59,15 +60,15 @@ class Trainer():
             return
         
         base_code = self.encoder.cat_tensor(target_style.to(self.device))
-        stylized = self.model(content_images, domain_class=base_code.to(self.device))
-        stylized = torch.clamp(stylized, 0, 1)
+        stylized_images = self.model(content_images, domain_class=base_code.to(self.device))
+        stylized_images = torch.clamp(stylized_images, 0, 1)
 
         if self.args.loss == "tv_loss":
-            smooth_loss = self.tv_loss(stylized)
+            smooth_loss = self.tv_loss(stylized_images)
         else:
-            smooth_loss = get_gradients_loss(self.args, stylized, target_style.to(self.device))
+            smooth_loss = get_gradients_loss(self.args, stylized_images, target_style.to(self.device))
 
-        loss_c, loss_s = self.encoder(content_images, style_images, stylized)
+        loss_c, loss_s = self.encoder(content_images, style_images, stylized_images)
         loss_c = loss_c.mean().to(self.device)
         loss_s = loss_s.mean().to(self.device)
 
@@ -92,7 +93,7 @@ class Trainer():
                 "loss_s": loss_s_.item(),
                 "smooth_loss": smooth_loss_.item(),
                 "total_loss": reduce_loss.item(),
-                "images": wandb.Image(torch.cat((content_images.cpu(), style_images.cpu(), stylized.cpu()), 0))
+                "images": wandb.Image(torch.cat((content_images.cpu(), style_images.cpu(), stylized_images.cpu()), 0))
             })
         
         if (batch_id + 1) % self.args.freq_save == 0:
@@ -101,3 +102,11 @@ class Trainer():
                 'state_dict': self.model.state_dict(),
                 'optimizer': self.optimizer.state_dict()
             }, os.path.join(self.args.output_path, self.args.job_name, "model_save", str(batch_id) + '.ckpt'))
+
+        if total_loss.clone() < min_loss:
+            min_loss == total_loss.clone()
+            save_checkpoint({
+                'step': batch_id,
+                'state_dict': self.model.state_dict(),
+                'optimizer': self.optimizer.state_dict()
+            }, os.path.join(self.args.output_path, self.args.job_name, "model_save", "best_model.ckpt"))

@@ -1,14 +1,15 @@
 import os
 import yaml
 import random
-
 import numpy as np
 
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+from torchvision import transforms as T
 
 from munch import Munch
+from skimage.metrics import structural_similarity as ssim
 
 
 def yaml_load(file_config: str):
@@ -104,4 +105,32 @@ def get_gradients_loss(args, I, R):
 
 
 def save_checkpoint(state, filename):
-    torch.save(state, filename + '.pth')
+    torch.save(state, filename)
+
+
+def remove_prefix(state_dict, prefix):
+    f = lambda x: x.split(prefix, 1)[-1] if x.startswith(prefix) else x
+    return {f(key): value for key, value in state_dict.items()}
+
+
+def get_checkpoint(model_path, device, prefix: str = None):
+    checkpoint = torch.load(model_path, map_location=device)
+    if prefix:
+        checkpoint["state_dict"] = remove_prefix(checkpoint["state_dict"], prefix)
+
+    return checkpoint
+
+
+def tensor2array(tensor: torch.tensor):
+    transform = T.ToPILImage()
+    tensor = tensor[0, 0, ...]
+    array = np.array(transform(tensor))
+
+    return array
+
+
+def get_ssim(imgA, imgB):
+    imgA = tensor2array(imgA)
+    imgB = tensor2array(imgB)
+
+    return ssim(imgA, imgB)

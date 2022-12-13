@@ -20,7 +20,7 @@ from tqdm.auto import tqdm
 
 
 def train(args: dict):
-    print("Build dataset from data source")
+    print("Build train dataset from data source")
     train_dataset = get_dataset(args)
     train_sampler = DistributedGivenIterationSampler(
         train_dataset,
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         if not parsed_args.resume:
             args.id = wandb.util.generate_id()
         wandb.init(config=dict(args), project=args.project, entity=args.entity,\
-             resume="allow", name=f"{args.name}_{args.id}", id=args.id)
+             resume="allow", name=f"{args.name}_train_{args.id}", id=args.id)
         args = Munch(wandb.config)
     
     if args.show_model:

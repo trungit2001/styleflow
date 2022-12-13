@@ -2,10 +2,10 @@
 job_name: coco2wikiart
 
 # path file data
-input_content_path: /kaggle/input/coco25k
-input_style_path: /kaggle/input/wikiart25k
-content_file: coco25k.txt
-style_file: wikiart25k.txt
+input_content_path: /kaggle/input/coco30k
+input_style_path: /kaggle/input/wikiart30k
+content_file: coco_train.txt
+style_file: wikiart_train.txt
 output_path: ./output
 
 # config data
