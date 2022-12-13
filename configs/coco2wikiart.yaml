@@ -48,3 +48,5 @@ freq_save: 500
 # config wandb
 name: styleflow
 id: null
+project: "StyleFlow GAN"
+entity: "gr7-cviuh"
