@@ -43,7 +43,7 @@ def train(args: dict):
     dset.set_description("Training")
 
     trainer = Trainer(args)
-    for batch_id, (content_iter, style_iter) in enumerate(dset):
+    for batch_id, (content_iter, style_iter) in enumerate(dset, start=1):
         trainer.train(batch_id, content_iter, style_iter)
 
 

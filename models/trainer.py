@@ -79,7 +79,7 @@ class Trainer():
         self.lr_scheduler.step()
         self.optimizer.zero_grad()
 
-        if self.args.wandb and (batch_id + 1) % self.args.log_interval == 0:
+        if self.args.wandb and batch_id % self.args.log_interval == 0:
             reduce_loss = total_loss.clone()
             loss_c_ = loss_c.clone()
             loss_s_ = loss_s.clone()
@@ -96,7 +96,7 @@ class Trainer():
                 "images": wandb.Image(torch.cat((content_images.cpu(), style_images.cpu(), stylized_images.cpu()), 0))
             })
         
-        if (batch_id + 1) % self.args.freq_save == 0:
+        if batch_id % self.args.freq_save == 0:
             save_checkpoint({
                 'step': batch_id,
                 'state_dict': self.model.state_dict(),

@@ -65,7 +65,7 @@ def test(args: dict):
     dset.set_description("Testing")
 
     total_ssim = []
-    for batch_id, (content_iter, style_iter) in enumerate(dset):
+    for batch_id, (content_iter, style_iter) in enumerate(dset, start=1):
         content_images = content_iter.to(args.device)
         style_images = style_iter.to(args.device)
 
@@ -77,7 +77,7 @@ def test(args: dict):
         total_ssim.append(ssim)
         avg_ssim = np.mean(total_ssim)
 
-        if args.wandb and (batch_id + 1) % args.log_interval == 0:
+        if args.wandb and batch_id % args.log_interval == 0:
             wandb.log({
                 "epoch": batch_id,
                 "ssim": avg_ssim,
