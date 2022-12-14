@@ -1,16 +1,16 @@
 # set job name
-job_name: coco2wikiart
+job_name: gtav2cityscapes
 
 # path file data
-input_content_path: /kaggle/input/coco30k
-input_style_path: /kaggle/input/wikiart30k
-content_file: coco_train.txt
-style_file: wikiart_train.txt
+input_content_path: /kaggle/input/gtav2k5
+input_style_path: /kaggle/input/cityscapes2k5
+content_file: gtav_train.txt
+style_file: cityscapes_train.txt
 output_path: ./output
 
 # config data
-height: 300
-width: 400
+height: 800
+width: 1000
 
 # config model
 seed: 0
@@ -21,7 +21,7 @@ affine: False
 domain_code: 0
 loss: tv_loss
 vgg: ./vgg_model/vgg_normalised.pth
-lr: 0.00005
+lr: 0.0001
 lr_decay: 0.00005
 max_iter: 50000
 lr_steps: [40000, 80000, 120000]
@@ -38,7 +38,7 @@ style_weight: 1
 content_weight: 0.1
 
 # other config
-keep_ratio: 0.7
+keep_ratio: 0.6
 resume: False
 debug: True
 workers: 2
@@ -46,7 +46,7 @@ log_interval: 100
 freq_save: 5000
 
 # config wandb
-name: styleflow
+name: styleflow_gta
 id: null
 project: "StyleFlow GAN"
 entity: "gr7-cviuh"
