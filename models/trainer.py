@@ -86,6 +86,14 @@ class Trainer():
             smooth_loss_ = smooth_loss.clone()
             current_lr = self.lr_scheduler.get_lr()[0]
 
+            if reduce_loss < min_loss:
+                min_loss == reduce_loss
+                save_checkpoint({
+                    'step': batch_id,
+                    'state_dict': self.model.state_dict(),
+                    'optimizer': self.optimizer.state_dict()
+                }, os.path.join(self.args.output_path, self.args.job_name, "model_save", "best_model.ckpt"))
+
             self.logger.log({
                 "epoch": batch_id,
                 "current_lr": current_lr,
@@ -102,11 +110,3 @@ class Trainer():
                 'state_dict': self.model.state_dict(),
                 'optimizer': self.optimizer.state_dict()
             }, os.path.join(self.args.output_path, self.args.job_name, "model_save", str(batch_id) + '.ckpt'))
-
-        if total_loss.clone() < min_loss:
-            min_loss == total_loss.clone()
-            save_checkpoint({
-                'step': batch_id,
-                'state_dict': self.model.state_dict(),
-                'optimizer': self.optimizer.state_dict()
-            }, os.path.join(self.args.output_path, self.args.job_name, "model_save", "best_model.ckpt"))
