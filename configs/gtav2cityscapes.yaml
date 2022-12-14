@@ -23,7 +23,7 @@ loss: tv_loss
 vgg: ./vgg_model/vgg_normalised.pth
 lr: 0.0001
 lr_decay: 0.00005
-max_iter: 50000
+max_iter: 40000
 lr_steps: [40000, 80000, 120000]
 lr_mults: 0.5
 last_iter: -1
