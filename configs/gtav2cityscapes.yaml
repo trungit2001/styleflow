@@ -9,8 +9,8 @@ style_file: cityscapes_train.txt
 output_path: ./output
 
 # config data
-height: 800
-width: 1000
+height: 300
+width: 400
 
 # config model
 seed: 0
