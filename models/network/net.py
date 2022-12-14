@@ -183,7 +183,7 @@ class Net(nn.Module):
 
     def cat_tensor(self,img):
         feat = self.encode_with_intermediate(img)
-        mean,std = calc_mean_std(feat[0])
+        mean, std = calc_mean_std(feat[0])
         mean = mean.squeeze(2)
         mean = mean.squeeze(2)
         std = std.squeeze(2)
@@ -213,7 +213,7 @@ class Net(nn.Module):
             g = gram_matrix(style_feats[i])
             g = g.view(1,g.shape[0]*g.shape[0])
             gl.append(g)
-        gl_tensor = torch.cat(gl,dim=1)
+        gl_tensor = torch.cat(gl, dim=1)
 
         return gl_tensor
 
