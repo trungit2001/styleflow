@@ -52,8 +52,6 @@ class Trainer():
         target_style = style_iter
         min_loss = 2**16
 
-        domain_weight = torch.tensor(1).to(self.device)
-
         if self.init:
             base_code = self.encoder.cat_tensor(style_images.to(self.device))
             self.model(content_images, domain_class=base_code.to(self.device))
@@ -70,7 +68,7 @@ class Trainer():
         else:
             smooth_loss = get_gradients_loss(self.args, stylized_images, target_style.to(self.device))
 
-        loss_c, loss_s = self.encoder(content_images, style_images, stylized_images, domain_weight)
+        loss_c, loss_s = self.encoder(content_images, style_images, stylized_images)
         loss_c = loss_c.mean().to(self.device)
         loss_s = loss_s.mean().to(self.device)
 
